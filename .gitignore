@@ -1,0 +1,25 @@
+# MacOS
+.DS_Store
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Log files
+*.log
+
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# DB and static files
+db.sqlite3
+/static
+
+# PyCharm
+.idea/
+
+# Secrets, access tokens
+secrets
