@@ -26,6 +26,8 @@ class Contact:
     def __init__(self, username: str, subdomain: str):
         self.username = username
         self.subdomain = FRESHDESK_CONTACTS_ENDPOINT.format(subdomain)
+        self.freshdesk_auth = (FRESHDESK_TOKEN, '')
+        self.github_auth = (GITHUB_TOKEN, '')
 
     def create_update_contact(self) -> None:
         """Create or update a contact in Freshdesk based on GitHub username.
@@ -53,7 +55,7 @@ class Contact:
         response = requests.post(
             self.subdomain,
             json=contact_info,
-            auth=(FRESHDESK_TOKEN, ''))
+            auth=self.freshdesk_auth)
 
         if response.status_code == requests.codes.created:
             logger.debug('Freshdesk contact with id %s successfully created.', response.json().get('id'))
@@ -67,7 +69,7 @@ class Contact:
         response = requests.put(
             f'{self.subdomain}{contact_id}',
             json=contact_info,
-            auth=(FRESHDESK_TOKEN, ''))
+            auth=self.freshdesk_auth)
 
         if response.status_code == requests.codes.ok:
             logger.debug('Freshdesk contact with id %s successfully updated.', contact_id)
@@ -90,7 +92,7 @@ class Contact:
 
         response = requests.delete(
             f'{self.subdomain}{contact_id}/hard_delete?force=true',
-            auth=(FRESHDESK_TOKEN, ''))
+            auth=self.freshdesk_auth)
 
         if response.status_code == requests.codes.no_content:
             logger.debug('Freshdesk contact %s successfully deleted.', contact_id)
@@ -101,7 +103,7 @@ class Contact:
         """Find a Freshdesk contact through their Github user id and return that contact's id."""
         response = requests.get(
             f'{self.subdomain}?unique_external_id={github_id}',
-            auth=(FRESHDESK_TOKEN, ''))
+            auth=self.freshdesk_auth)
 
         if response.status_code != requests.codes.ok:
             self.log_response_errors(response, 'Freshdesk contact could not be successfully fetched')
@@ -114,7 +116,7 @@ class Contact:
 
         response = requests.get(
             f'{GITHUB_USER_ENDPOINT}{username}',
-            auth=(GITHUB_TOKEN, ''))
+            auth=self.github_auth)
 
         if response.status_code == requests.codes.not_found:
             self.log_response_errors(response, 'GitHub user not found')
