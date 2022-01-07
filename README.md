@@ -39,12 +39,12 @@ Alternatively, use `git clone git@github.com:natla/freshdesk-contact.git`.
     If you don't have a GitHub personal access token, refer to the [Creating a personal access token guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).  
     For a guide how to create a Freshdesk API key, refer to the [Authentication article](https://developers.freshdesk.com/api/#getting-started).
 
-    Please export your GitHub personal access token as a GITHUB_TOKEN environmental variable
-and your Freshdesk API key as a FRESHDESK_TOKEN environmental variable:
-
-        export GITHUB_TOKEN='ghp_9L0IX0NdXXXXXXXXXXXXXXXXXXXXX'  
-    
-        export FRESHDESK_TOKEN='BPzlZTHXXXXXXXXXX'
+   Once you have these tokens, define them as environment variables in a `.env` file 
+   that should be placed in the main `freshdesk-contact` directory. Example file content:
+   
+        GITHUB_TOKEN=ghp_9L0IX0NdXXXXXXXXXXXXXXXXXXXXX
+        FRESHDESK_TOKEN=BPzlZTHXXXXXXXXXX
+        
 
 - Navigate to the `freshdesk-contact` directory. From inside that directory, install the required third-party dependencies from `requirements.txt`:  
 
