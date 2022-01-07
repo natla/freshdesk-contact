@@ -79,6 +79,13 @@ For example:
 
 - Make it possible to upload an avatar image to Freshdesk, using the GitHub avatar URL.
 
-- Distinguish between contacts of persons and organizations.
+- Distinguish between contacts of persons and organizations. Probably use two concrete factories that register an abstract interface.
 
 - If a GitHub user belongs to a company (organization), create a contact of that company and link it to the user through the `company_id` field.
+
+- Add a Scheduler (cron job) to the application that updates a contact's information
+at a certain time interval.
+
+- Figure out how to integrate the deletion of a contact into the main flow of the program.
+
+- Add more unit tests (for example, the deletion of a contact is not currently being tested).
